@@ -20,6 +20,11 @@
     "supportedTargets": [
         "microbit"
     ],
+    "card": {
+        "name": "Magnetics",
+        "imageUrl": "file:../icon.png",
+        "feedbackUrl": "https://github.com/letssteam/pxt-magnetics-microbit/issues"
+    },
     "yotta": {
         "config": {
             "microbit-dal": {
