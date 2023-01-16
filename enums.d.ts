@@ -1,5 +1,5 @@
 // Auto-generated. Do not edit.
-declare namespace linebeacon {
+declare namespace Magnetics {
 }
 
 // Auto-generated. Do not edit. Really.

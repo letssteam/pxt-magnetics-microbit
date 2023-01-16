@@ -4,19 +4,17 @@
     "description": "Magnetics project",
     "license": "MIT",
     "dependencies": {
-        "core": "*"
+        "core": "*",
+        "bluetooth": "*"
     },
     "files": [
         "README.md",
         "enums.d.ts",
         "shims.d.ts",
-        "linebeacon.ts",
-        "linebeacon.cpp",
-        "LineBeaconService.cpp",
-        "LineBeaconService.h"
-    ],
-    "testFiles": [
-        "test.ts"
+        "BLEAdvertising.h",
+        "BLEAdvertising.cpp",
+        "magnetics.ts",
+        "magnetics.cpp"
     ],
     "public": true,
     "supportedTargets": [
@@ -26,17 +24,10 @@
         "config": {
             "microbit-dal": {
                 "bluetooth": {
-                    "open": 1,
-                    "pairing_mode": 0,
+                    "open": 0,
                     "whitelist": 0,
                     "security_level": null
                 }
-            }
-        },
-        "optionalConfig": {
-            "microbit-dal": {
-                "stack_size": 1280,
-                "gatt_table_size": "0x700"
             }
         }
     }

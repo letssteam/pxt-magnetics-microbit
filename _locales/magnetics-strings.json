@@ -1,7 +1,9 @@
 {
-  "linebeacon.startWithDeviceMessage|block": "LINE Beacon start HWID is %hwid|with Device Message %message",
-  "linebeacon.start|block": "LINE Beacon start HWID is %hwid",
-  "linebeacon.stop|block": "LINE Beacon stop",
-  "linebeacon|block": "LINE Beacon",
-  "{id:category}Linebeacon": "Linebeacon"
+  "magnetics.sendNumber|block": "Send number %name",
+  "magnetics.sendValue|block": "Send value %name : %value",
+  "magnetics.setData|block": "Send string %name",
+  "magnetics.setName|block": "Set device name to %name",
+  "magnetics.startAdvertising|block": "Start sending",
+  "magnetics.stopAdvertising|block": "Stop sending",
+  "{id:category}Magnetics": "Magnetics"
 }
