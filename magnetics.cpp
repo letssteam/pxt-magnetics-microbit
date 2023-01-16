@@ -6,7 +6,7 @@
 
 #include "BLEAdvertising.h"
 
-// static BLEAdvertising *advertising = nullptr;
+static BLEAdvertising *advertising = nullptr;
 
 using namespace pxt;
 
