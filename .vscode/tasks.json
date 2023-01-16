@@ -1,0 +1,63 @@
+{
+    "version": "2.0.0",
+    "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": true,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false,
+        "revealProblems": "never"
+    },
+    "problemMatcher": [],
+
+    "tasks": [
+        {
+            
+            "label": "🔧 Build target",
+            "type": "shell",
+            "command": "cd pxt-microbit && pxt buildtarget",
+        },
+        {
+            
+            "label": "🔨 Build (pxt build)",
+            "type": "shell",
+            "command": "cd pxt-microbit && pxt build",
+        },
+        {
+            "label": "🧽 Clean",
+            "type": "shell",
+            "command": "cd pxt-microbit && pxt clean",
+        },
+        {
+            "label": "🧹🔧 Clean & Build target",
+            "type": "shell",
+            "command": "",
+            "dependsOn" : [
+                "🧽 Clean",
+                "🔧 Build target"
+            ],
+            "dependsOrder": "sequence"
+        },
+        {
+            "label": "🧹🔨 Clean & Build (pxt)",
+            "type": "shell",
+            "command": "",
+            "dependsOn" : [
+                "🧽 Clean",
+                "🔨 Build (pxt build)"
+            ],
+            "dependsOrder": "sequence"
+        },
+        {
+            "label": "📡 Serve",
+            "type": "shell",
+            "command": "cd pxt-microbit && pxt serve"
+        },
+        {
+            "label": "📡 Serve (no browser)",
+            "type": "shell",
+            "command": "cd pxt-microbit && pxt serve --noBrowser"
+        }
+    ]
+}

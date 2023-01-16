@@ -8,23 +8,6 @@ FROM mcr.microsoft.com/vscode/devcontainers/cpp:0-${VARIANT}
 RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections && \
     apt-get update && \
     apt-get upgrade -y && \
-    apt-get install git nodejs npm -y && \
+    apt-get install git nodejs npm python3 -y && \
     apt-get autoclean -y && \
     npm install -g pxt
-
-
-    # apt-get update -qq && \
-    # apt-get install -y --no-install-recommends \
-    #   software-properties-common && \
-    # add-apt-repository -y ppa:team-gcc-arm-embedded/ppa && \
-    # apt-get update -qq && \
-    # apt-get upgrade -qy && \
-    # apt-get install -y --no-install-recommends \
-    #   git make cmake python3 \
-    #   gcc-arm-embedded && \
-    # apt-get autoremove -y && \
-    # apt-get install python3-pip -y && \
-    # apt-get clean -y && \
-    # pip3 install -U pip setuptools && \
-    # pip3 install pyocd && \
-    # rm -rf /var/lib/apt/lists/*
