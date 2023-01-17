@@ -25,7 +25,21 @@ void BLEAdvertising::startAdvertising()
     advData.name_type = BLE_ADVDATA_FULL_NAME;
     advData.flags = BLE_GAP_ADV_FLAG_BR_EDR_NOT_SUPPORTED | BLE_GAP_ADV_FLAG_LE_GENERAL_DISC_MODE;
 
-    sd_ble_gap_appearance_set(BLE_APPEARANCE_GENERIC_COMPUTER);
+    //sd_ble_gap_appearance_set(BLE_APPEARANCE_GENERIC_COMPUTER);
+
+    ble_advdata_service_data_t serviceData[1];
+    uint8_array_t serviceArray;
+
+    serviceArray[0].p_data = data.c_str();
+    serviceArray[0].size = data.size();
+
+    serviceData.data = serviceArray;
+    serviceData.service_uuid = SERVICEDATA_UUID;
+
+    advData.p_service_data_array = serviceData;
+    advData.service_data_count = 1;
+
+
 
     ble_gap_adv_params_t    gap_adv_params;
     memset( &gap_adv_params, 0, sizeof( gap_adv_params));
@@ -39,11 +53,13 @@ void BLEAdvertising::startAdvertising()
     if ( gap_adv_params.interval > BLE_GAP_ADV_INTERVAL_MAX) gap_adv_params.interval = BLE_GAP_ADV_INTERVAL_MAX;
 
 
-
     ble_gap_adv_data_t  gap_adv_data;
     memset( &gap_adv_data, 0, sizeof( gap_adv_data));
     gap_adv_data.adv_data.p_data    = enc_advdata;
     gap_adv_data.adv_data.len       = BLE_GAP_ADV_SET_DATA_SIZE_MAX;
+
+
+    
 
     MICROBIT_BLE_ECHK( ble_advdata_encode( &advData, gap_adv_data.adv_data.p_data, &gap_adv_data.adv_data.len));
     MICROBIT_BLE_ECHK( sd_ble_gap_adv_set_configure( &advHandle, &gap_adv_data, &gap_adv_params));
