@@ -29,9 +29,11 @@ class BLEAdvertising
         std::string data;
 
         char gapName[28];
+        char data[32];
 
         void updateAdvertising();
         void setName();
+        void setData();
 };
 
 #endif

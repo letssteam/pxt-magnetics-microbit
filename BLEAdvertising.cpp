@@ -12,7 +12,7 @@ void BLEAdvertising::startAdvertising()
 {
     stopAdvertising();
     setName();
-
+    setData();
 
 
     uint8_t advHandle;
@@ -30,10 +30,10 @@ void BLEAdvertising::startAdvertising()
     ble_advdata_service_data_t serviceData[1];
     uint8_array_t serviceArray;
 
-    serviceArray.p_data = data.c_str();
-    serviceArray.size = data.size();
+    serviceArray.p_data = data;
+    serviceArray.size = (data.size() > 32) ? 32 : data.size();
 
-    serviceData[0].data = serviceArray;
+    serviceData[0].data = (uint8_t *) serviceArray;
     serviceData[0].service_uuid = SERVICEDATA_UUID;
 
     advData.p_service_data_array = serviceData;
@@ -89,12 +89,14 @@ void BLEAdvertising::updateAdvertising()
 
 void BLEAdvertising::setName()
 {
-    uBit.display.scroll(name.c_str());
-
     int len = sprintf(gapName, "%s", name.c_str());
     ble_gap_conn_sec_mode_t permissions;
     BLE_GAP_CONN_SEC_MODE_SET_NO_ACCESS(&permissions);
     MICROBIT_BLE_ECHK(sd_ble_gap_device_name_set(&permissions, (uint8_t *)gapName, len));
+}
+
+void BLEAdvertising::setData(){
+    sprintf(data, "%s", data.substr(0, 32).c_str());
 }
 
 #endif
