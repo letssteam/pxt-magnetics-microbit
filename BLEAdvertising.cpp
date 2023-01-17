@@ -30,11 +30,11 @@ void BLEAdvertising::startAdvertising()
     ble_advdata_service_data_t serviceData[1];
     uint8_array_t serviceArray;
 
-    serviceArray[0].p_data = data.c_str();
-    serviceArray[0].size = data.size();
+    serviceArray.p_data = data.c_str();
+    serviceArray.size = data.size();
 
-    serviceData.data = serviceArray;
-    serviceData.service_uuid = SERVICEDATA_UUID;
+    serviceData[0].data = serviceArray;
+    serviceData[0].service_uuid = SERVICEDATA_UUID;
 
     advData.p_service_data_array = serviceData;
     advData.service_data_count = 1;
