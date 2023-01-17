@@ -12,7 +12,6 @@ void BLEAdvertising::startAdvertising()
 {
     stopAdvertising();
     setName();
-    setData();
 
 
     uint8_t advHandle;
@@ -30,10 +29,10 @@ void BLEAdvertising::startAdvertising()
     ble_advdata_service_data_t serviceData[1];
     uint8_array_t serviceArray;
 
-    serviceArray.p_data = data;
-    serviceArray.size = (data.size() > 32) ? 32 : data.size();
+    serviceArray.p_data = (uint8_t *) data;
+    serviceArray.size = dataLength;
 
-    serviceData[0].data = (uint8_t *) serviceArray;
+    serviceData[0].data = serviceArray;
     serviceData[0].service_uuid = SERVICEDATA_UUID;
 
     advData.p_service_data_array = serviceData;
@@ -49,16 +48,18 @@ void BLEAdvertising::startAdvertising()
     gap_adv_params.primary_phy      = BLE_GAP_PHY_1MBPS;
 
     gap_adv_params.interval         = ( 1000 * MICROBIT_BLE_ADVERTISING_INTERVAL/* interval_ms */) / 625;  // 625 us units
-    if ( gap_adv_params.interval < BLE_GAP_ADV_INTERVAL_MIN) gap_adv_params.interval = BLE_GAP_ADV_INTERVAL_MIN;
-    if ( gap_adv_params.interval > BLE_GAP_ADV_INTERVAL_MAX) gap_adv_params.interval = BLE_GAP_ADV_INTERVAL_MAX;
+    
+    if ( gap_adv_params.interval < BLE_GAP_ADV_INTERVAL_MIN)
+        gap_adv_params.interval = BLE_GAP_ADV_INTERVAL_MIN;
+
+    if ( gap_adv_params.interval > BLE_GAP_ADV_INTERVAL_MAX)
+        gap_adv_params.interval = BLE_GAP_ADV_INTERVAL_MAX;
 
 
     ble_gap_adv_data_t  gap_adv_data;
     memset( &gap_adv_data, 0, sizeof( gap_adv_data));
     gap_adv_data.adv_data.p_data    = enc_advdata;
     gap_adv_data.adv_data.len       = BLE_GAP_ADV_SET_DATA_SIZE_MAX;
-
-
     
 
     MICROBIT_BLE_ECHK( ble_advdata_encode( &advData, gap_adv_data.adv_data.p_data, &gap_adv_data.adv_data.len));
@@ -87,7 +88,7 @@ void BLEAdvertising::updateAdvertising()
     }
 }
 
-void BLEAdvertising::setName()
+void BLEAdvertising::setGapName()
 {
     int len = sprintf(gapName, "%s", name.c_str());
     ble_gap_conn_sec_mode_t permissions;
@@ -95,8 +96,9 @@ void BLEAdvertising::setName()
     MICROBIT_BLE_ECHK(sd_ble_gap_device_name_set(&permissions, (uint8_t *)gapName, len));
 }
 
-void BLEAdvertising::setData(){
-    sprintf(data, "%s", data.substr(0, 32).c_str());
+void BLEAdvertising::setData(std::string str){
+    dataLength = sprintf(data, "%s", data.substr(0, DATA_MAX_SIZE).c_str());
+    updateAdvertising();
 }
 
 #endif

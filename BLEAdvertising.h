@@ -11,13 +11,17 @@
 #include "ble.h"
 #include <string>
 
+
+
 class BLEAdvertising
 {
 
     public:
+        constexpr int DATA_MAX_SIZE = 32;
+        
         BLEAdvertising(BLEDevice &ble) : ble(ble), isAdvertise(false) {}
         void setDeviceName(std::string name) { this->name = name; updateAdvertising(); }
-        void setData(std::string str) { data = str; updateAdvertising(); }
+        void setData(std::string str);
 
         void startAdvertising();
         void stopAdvertising();
@@ -26,14 +30,13 @@ class BLEAdvertising
         BLEDevice &ble;
         bool isAdvertise;
         std::string name;
-        std::string data;
-
+        
+        int dataLength;
+        char data[DATA_MAX_SIZE];
         char gapName[28];
-        char data[32];
 
         void updateAdvertising();
-        void setName();
-        void setData();
+        void setGapName();
 };
 
 #endif
