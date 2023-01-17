@@ -18,7 +18,7 @@ class BLEAdvertising
 {
 
     public:
-        BLEAdvertising(BLEDevice &ble) : ble(ble), isAdvertise(false) {}
+        BLEAdvertising(BLEDevice &ble) : ble(ble), isAdvertise(false), dataLength(0) {}
         void setDeviceName(std::string name) { this->name = name; updateAdvertising(); }
         void setData(std::string str);
 

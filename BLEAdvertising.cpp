@@ -11,7 +11,7 @@ constexpr uint16_t SERVICEDATA_UUID = 0x181C;
 void BLEAdvertising::startAdvertising()
 {
     stopAdvertising();
-    setName();
+    setGapName();
 
 
     uint8_t advHandle;
@@ -77,7 +77,7 @@ void BLEAdvertising::stopAdvertising()
 
 void BLEAdvertising::updateAdvertising()
 {
-    if (name.size() == 0 || data.size() == 0)
+    if (name.size() == 0 || dataLength == 0)
     {
         stopAdvertising();
         return;
@@ -97,7 +97,7 @@ void BLEAdvertising::setGapName()
 }
 
 void BLEAdvertising::setData(std::string str){
-    dataLength = sprintf(data, "%s", data.substr(0, DATA_MAX_SIZE).c_str());
+    dataLength = sprintf(data, "%s", str.substr(0, DATA_MAX_SIZE).c_str());
     updateAdvertising();
 }
 
