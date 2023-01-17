@@ -24,19 +24,19 @@ void BLEAdvertising::startAdvertising()
     advData.name_type = BLE_ADVDATA_FULL_NAME;
     advData.flags = BLE_GAP_ADV_FLAG_BR_EDR_NOT_SUPPORTED | BLE_GAP_ADV_FLAG_LE_GENERAL_DISC_MODE;
 
-    //sd_ble_gap_appearance_set(BLE_APPEARANCE_GENERIC_COMPUTER);
+    // sd_ble_gap_appearance_set(BLE_APPEARANCE_GENERIC_COMPUTER);
 
-    ble_advdata_service_data_t serviceData[1];
-    uint8_array_t serviceArray;
+    // ble_advdata_service_data_t serviceData[1];
+    // uint8_array_t serviceArray;
 
-    serviceArray.p_data = (uint8_t *) data;
-    serviceArray.size = dataLength;
+    // serviceArray.p_data = (uint8_t *) data;
+    // serviceArray.size = dataLength;
 
-    serviceData[0].data = serviceArray;
-    serviceData[0].service_uuid = SERVICEDATA_UUID;
+    // serviceData[0].data = serviceArray;
+    // serviceData[0].service_uuid = SERVICEDATA_UUID;
 
-    advData.p_service_data_array = serviceData;
-    advData.service_data_count = 1;
+    // advData.p_service_data_array = serviceData;
+    // advData.service_data_count = 1;
 
 
 
