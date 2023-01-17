@@ -26,17 +26,17 @@ void BLEAdvertising::startAdvertising()
 
     // sd_ble_gap_appearance_set(BLE_APPEARANCE_GENERIC_COMPUTER);
 
-    // ble_advdata_service_data_t serviceData[1];
-    // uint8_array_t serviceArray;
+    ble_advdata_service_data_t serviceData[1];
+    uint8_array_t serviceArray;
 
-    // serviceArray.p_data = (uint8_t *) data;
-    // serviceArray.size = dataLength;
+    serviceArray.p_data = (uint8_t *) data;
+    serviceArray.size = dataLength;
 
-    // serviceData[0].data = serviceArray;
-    // serviceData[0].service_uuid = SERVICEDATA_UUID;
+    serviceData[0].data = serviceArray;
+    serviceData[0].service_uuid = SERVICEDATA_UUID;
 
-    // advData.p_service_data_array = serviceData;
-    // advData.service_data_count = 1;
+    advData.p_service_data_array = serviceData;
+    advData.service_data_count = 1;
 
 
 
@@ -90,7 +90,10 @@ void BLEAdvertising::updateAdvertising()
 
 void BLEAdvertising::setGapName()
 {
+
     int len = sprintf(gapName, "%s", name.c_str());
+    uBit.display.scroll(gapName);
+
     ble_gap_conn_sec_mode_t permissions;
     BLE_GAP_CONN_SEC_MODE_SET_NO_ACCESS(&permissions);
     MICROBIT_BLE_ECHK(sd_ble_gap_device_name_set(&permissions, (uint8_t *)gapName, len));
@@ -98,6 +101,9 @@ void BLEAdvertising::setGapName()
 
 void BLEAdvertising::setData(std::string str){
     dataLength = sprintf(data, "%s", str.substr(0, DATA_MAX_SIZE).c_str());
+
+    uBit.display.scroll(data);
+
     updateAdvertising();
 }
 
