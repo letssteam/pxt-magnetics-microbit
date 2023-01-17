@@ -12,13 +12,12 @@
 #include <string>
 
 
+constexpr int DATA_MAX_SIZE = 32;
 
 class BLEAdvertising
 {
 
     public:
-        constexpr int DATA_MAX_SIZE = 32;
-        
         BLEAdvertising(BLEDevice &ble) : ble(ble), isAdvertise(false) {}
         void setDeviceName(std::string name) { this->name = name; updateAdvertising(); }
         void setData(std::string str);
@@ -30,7 +29,7 @@ class BLEAdvertising
         BLEDevice &ble;
         bool isAdvertise;
         std::string name;
-        
+
         int dataLength;
         char data[DATA_MAX_SIZE];
         char gapName[28];
