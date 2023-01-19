@@ -12,13 +12,14 @@
 #include <string>
 
 
-constexpr int DATA_MAX_SIZE = 32;
+constexpr int NAME_MAX_SIZE = 10;
+constexpr int DATA_MAX_SIZE = 20;
 
 class BLEAdvertising
 {
 
     public:
-        BLEAdvertising(BLEDevice &ble) : ble(ble), isAdvertise(false), dataLength(0) {}
+        BLEAdvertising(BLEDevice &ble);
         void setDeviceName(std::string name) { this->name = name; updateAdvertising(); }
         void setData(std::string str);
 
