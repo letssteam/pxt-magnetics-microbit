@@ -100,9 +100,7 @@ void BLEAdvertising::updateAdvertising()
 
 void BLEAdvertising::setGapName()
 {
-
     int len = sprintf(gapName, "%s", name.substr(0, NAME_MAX_SIZE).c_str());
-    uBit.display.scroll(gapName);
 
     ble_gap_conn_sec_mode_t permissions;
     BLE_GAP_CONN_SEC_MODE_SET_NO_ACCESS(&permissions);
@@ -111,8 +109,6 @@ void BLEAdvertising::setGapName()
 
 void BLEAdvertising::setData(std::string str){
     dataLength = sprintf(data, "%s", str.substr(0, DATA_MAX_SIZE).c_str());
-
-    uBit.display.scroll(data);
 
     updateAdvertising();
 }
