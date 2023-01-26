@@ -9,11 +9,15 @@
 
 #include "pxt.h"
 #include "ble.h"
+#include "ble_gap.h"
+#include "nrf_sdh_ble.h"
 #include <string>
+
 
 
 constexpr int NAME_MAX_SIZE = 10;
 constexpr int DATA_MAX_SIZE = 20;
+
 
 class BLEAdvertising
 {
@@ -26,9 +30,15 @@ class BLEAdvertising
         void startAdvertising();
         void stopAdvertising();
 
+        void startScanning();
+        void stopScanning();
+
+        void handleAdvertisingReport(ble_gap_evt_adv_report_t& report);
+
     private:
         BLEDevice &ble;
         bool isAdvertise;
+        bool isScanning;
         std::string name;
 
         int dataLength;

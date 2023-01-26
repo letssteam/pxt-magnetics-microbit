@@ -4,15 +4,23 @@
 
 #include <cstdint>
 #include "ble_advdata.h"
+#include "ble_gap.h"
 
 constexpr uint8_t FLAGS[1] = {0x06}; // Br Edr Not Supported, LE General Discovery Mode
 constexpr uint16_t SERVICEDATA_UUID = 0x181C;
 
-BLEAdvertising::BLEAdvertising(BLEDevice &ble) : ble(ble), isAdvertise(false), dataLength(0) {
+static void magnetics_ble_evt_handler(ble_evt_t const * event, void * context);
+
+BLEAdvertising::BLEAdvertising(BLEDevice &ble) : ble(ble), isAdvertise(false), isScanning(false), dataLength(0) {
+    NRF_SDH_BLE_OBSERVER( microbit_magnetics_observer, microbit_ble_OBSERVER_PRIO, magnetics_ble_evt_handler, this);
 }
 
 void BLEAdvertising::startAdvertising()
 {
+    if( isScanning ){
+        stopScanning();
+    }
+
     stopAdvertising();
     setGapName();
 
@@ -85,6 +93,26 @@ void BLEAdvertising::stopAdvertising()
     isAdvertise = false;
 }
 
+
+void BLEAdvertising::startScanning(){
+
+    if(isAdvertise){
+        stopAdvertising();
+    }
+
+    isScanning = true;
+}
+
+void BLEAdvertising::stopScanning(){
+    MICROBIT_BLE_ECHK( sd_ble_gap_scan_stop(void) );
+    isScanning = false;
+}
+
+void BLEAdvertising::handleAdvertisingReport(ble_gap_evt_adv_report_t& report){
+
+}
+
+
 void BLEAdvertising::updateAdvertising()
 {
     if (name.size() == 0 || dataLength == 0)
@@ -111,6 +139,20 @@ void BLEAdvertising::setData(std::string str){
     dataLength = sprintf(data, "%s", str.substr(0, DATA_MAX_SIZE).c_str());
 
     updateAdvertising();
+}
+
+
+void magnetics_ble_evt_handler(ble_evt_t const * event, void * context){
+
+    switch (event->header.evt_id)
+    {
+        case BLE_GAP_EVT_ADV_REPORT:
+            ((BLEAdvertising*)context)->handleAdvertisingReport( event->gap_event.adv_report );
+            break;
+        
+        default:
+            break;
+    }
 }
 
 #endif
