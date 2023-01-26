@@ -14,7 +14,10 @@
         "BLEAdvertising.h",
         "BLEAdvertising.cpp",
         "magnetics.ts",
-        "magnetics.cpp"
+        "magnetics.cpp",
+        "RawData.h",
+        "BLEAddress.h",
+        "AdvertisingReport.h"
     ],
     "public": true,
     "targetVersions": {
@@ -30,7 +33,7 @@
     ],
     "card": {
         "name": "Magnetics",
-        "imageUrl": "file:../icon.png",
+        "imageUrl": "file:icon.png",
         "feedbackUrl": "https://github.com/letssteam/pxt-magnetics-microbit/issues"
     },
     "yotta": {
