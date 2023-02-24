@@ -44,6 +44,10 @@
         "stdexcept": "cpp",
         "streambuf": "cpp",
         "cinttypes": "cpp",
-        "typeinfo": "cpp"
-    }
+        "typeinfo": "cpp",
+        "map": "cpp"
+    },
+    "C_Cpp.default.defines": [
+        "CONFIG_ENABLED(DEVICE_BLE)"
+      ]
 }
