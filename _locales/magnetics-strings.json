@@ -1,9 +1,16 @@
 {
+  "magnetics.availableScanFor|block": "is available data from %name",
+  "magnetics.getDataFrom|block": "read data from %name",
+  "magnetics.onNewMessageFrom|block": "On message from %from",
   "magnetics.sendNumber|block": "Send number %name",
   "magnetics.sendValue|block": "Send value %name : %value",
   "magnetics.setData|block": "Send string %name",
   "magnetics.setName|block": "Set device name to %name",
   "magnetics.startAdvertising|block": "Start sending",
+  "magnetics.startScanning|block": "Start receiving",
   "magnetics.stopAdvertising|block": "Stop sending",
-  "{id:category}Magnetics": "Magnetics"
+  "magnetics.stopScanning|block": "Stop receiving",
+  "{id:category}Magnetics": "Magnetics",
+  "{id:group}Receiving": "Receiving",
+  "{id:group}Sending": "Sending"
 }
