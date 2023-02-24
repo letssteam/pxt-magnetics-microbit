@@ -16,11 +16,12 @@ struct GAPServiceData {
 class AdvertisingReport {
 
     public:
-        AdvertisingReport(ble_gap_evt_adv_report_t& report);
-
-        std::vector<GAPServiceData> serviceData;
+        AdvertisingReport(const ble_gap_evt_adv_report_t& report);
+        
         int8_t rssi;
+        std::string name;
         BLEAddress address;
+        GAPServiceData serviceData;
 };
 
 #endif
