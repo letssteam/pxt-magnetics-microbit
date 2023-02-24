@@ -8,17 +8,19 @@
 class BLEAddress{
 
     public:
-        BLEAddress(uint8_t* addr) {
+        BLEAddress(const uint8_t* addr) {
             memcpy(address, addr, 6);
-        };
+        }
 
         std::string to_string(){
-            std::string str(17, '\0'); // 6*2 hex digits + 5 seperators
+            std::string str = "";
             char buffer[3] = {0};
 
-            for(uint8_t i = 0; i < 6; i++){
+            for(int8_t i = 5; i >= 0; i--){
                 sprintf(buffer, "%0.2X:", address[i]);
-                str.append(buffer);
+                str += buffer[0];
+                str += buffer[1];
+                str += ':';
             }
 
             return str.substr(0, str.size() - 1);
