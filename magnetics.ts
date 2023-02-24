@@ -104,7 +104,7 @@ namespace magnetics {
 
 
     //% blockId=magnetics_onnewmessagefrom
-    //% block="On message from %from"
+    //% block="On new message from %from"
     //% draggableParameters=reporter
     //% weight=70
     //% group="Receiving"

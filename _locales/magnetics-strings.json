@@ -1,7 +1,7 @@
 {
   "magnetics.availableScanFor|block": "is available data from %name",
   "magnetics.getDataFrom|block": "read data from %name",
-  "magnetics.onNewMessageFrom|block": "On message from %from",
+  "magnetics.onNewMessageFrom|block": "On new message from %from",
   "magnetics.sendNumber|block": "Send number %name",
   "magnetics.sendValue|block": "Send value %name : %value",
   "magnetics.setData|block": "Send string %name",
