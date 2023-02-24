@@ -7,6 +7,8 @@
 
 class RawData{
     public:
+        RawData() : data() {}
+        
         RawData(uint8_t* data, uint8_t size) : data(data, data + size) {}
 
         std::vector<uint8_t> to_vec(){
@@ -21,6 +23,18 @@ class RawData{
             }
 
             return str;
+        }
+
+        bool empty(){
+            return data.empty();
+        }
+
+        inline bool operator==(const RawData& other){
+            return data == other.data;
+        }
+
+        inline bool operator!=(const RawData& other){
+            return data != other.data;
         }
 
     private:
