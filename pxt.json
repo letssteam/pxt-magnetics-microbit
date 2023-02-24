@@ -17,7 +17,8 @@
         "magnetics.cpp",
         "RawData.h",
         "BLEAddress.h",
-        "AdvertisingReport.h"
+        "AdvertisingReport.h",
+        "AdvertisingReport.cpp"
     ],
     "public": true,
     "targetVersions": {
@@ -44,7 +45,8 @@
                     "whitelist": 0,
                     "security_level": null
                 }
-            }
+            },
+            "S140": 1
         }
     }
 }
